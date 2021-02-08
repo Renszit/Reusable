@@ -19,3 +19,22 @@
     color: white;
     transition: 1s ease;
 }
+
+.tooSmall {
+    height: 100%;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 10px;
+    background-color: red;
+    justify-content: center;
+    align-items: center;
+}
+
+.tooLarge {
+    height: 100%;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 10px;
+    background-color: red;
+    align-items: center;
+}
