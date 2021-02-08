@@ -1,14 +1,18 @@
 import "./progressbar.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const ProgressBar = (props) => {
-    const [percentage, setPercentage] = useState(20);
+const ProgressBar = ({ width, percentage }) => {
+    const [value, setValue] = useState(0);
+
+    useEffect(() => {
+        setValue(percentage * width);
+    }, [percentage, width]);
 
     return (
         <div>
             <div className="progressbar">
-                <div style={("width:", { percentage })} className="progress">
-                    {percentage}
+                <div style={{ width: `${value}px` }} className="progress">
+                    {value}%
                 </div>
             </div>
         </div>
