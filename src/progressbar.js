@@ -2,7 +2,8 @@ import "./progressbar.css";
 import { useState, useEffect } from "react";
 
 const ProgressBar = ({ percentage, value, minValue, maxValue }) => {
-    const [width, setWidth] = useState(0);
+    const [width, setWidth] = useState();
+    const [percentageCalc, setPercentageCalc] = useState();
     const [tooLarge, setTooLarge] = useState();
     const [tooSmall, setTooSmall] = useState();
 
@@ -20,28 +21,36 @@ const ProgressBar = ({ percentage, value, minValue, maxValue }) => {
                     percentage
                 );
                 setTooSmall(true);
+            } else if (percentage < 3) {
+                setPercentageCalc(percentage);
+                setWidth(3);
             } else {
                 setTooLarge(false);
                 setTooSmall(false);
+                setPercentageCalc(percentage);
                 setWidth(percentage);
             }
         } else {
-            let percent = ((value - minValue) * 100) / (maxValue - minValue);
+            const percent = ((value - minValue) * 100) / (maxValue - minValue);
             if (percent > 100) {
                 console.log(
                     "percentage is too high, can not be more than 100. Your percentage is:",
-                    percentage
+                    percent
                 );
                 setTooLarge(true);
             } else if (percent < 0) {
                 console.log(
                     "percentage is too low, can not be less than 0. Your percentage is:",
-                    percentage
+                    percent
                 );
                 setTooSmall(true);
+            } else if (percent < 3) {
+                setPercentageCalc(percent);
+                setWidth(3);
             } else {
                 setTooLarge(false);
                 setTooSmall(false);
+                setPercentageCalc(percent);
                 setWidth(percent);
             }
         }
@@ -50,13 +59,13 @@ const ProgressBar = ({ percentage, value, minValue, maxValue }) => {
     return (
         <div>
             <div className="progressbar">
-                {tooSmall && <div className="tooSmall">🙅‍♂️</div>}
+                {tooSmall && <div className="tooSmall">⚠️</div>}
                 {!tooSmall && !tooLarge && (
                     <div style={{ width: `${width}%` }} className="progress">
-                        {width}%
+                        {percentageCalc}%
                     </div>
                 )}
-                {tooLarge && <div className="tooLarge">🙅‍♂️</div>}
+                {tooLarge && <div className="tooLarge">⚠️</div>}
             </div>
         </div>
     );
