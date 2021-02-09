@@ -8,7 +8,7 @@ function App() {
                 <h1>Reusable components</h1>
             </header>
             <code>progressbar</code>
-            <ProgressBar percentage={80} />
+            <ProgressBar percentage={30} />
             <ProgressBar value={40} minValue={0} maxValue={200} />
             <code>/progressbar</code>
         </div>
